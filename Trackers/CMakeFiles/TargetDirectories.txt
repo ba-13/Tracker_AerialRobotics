@@ -1,0 +1,3 @@
+/home/b_anshuman/Videos/Aerial/Tracker_AerialRobotics/Trackers/CMakeFiles/rebuild_cache.dir
+/home/b_anshuman/Videos/Aerial/Tracker_AerialRobotics/Trackers/CMakeFiles/kcfTracker.dir
+/home/b_anshuman/Videos/Aerial/Tracker_AerialRobotics/Trackers/CMakeFiles/edit_cache.dir
