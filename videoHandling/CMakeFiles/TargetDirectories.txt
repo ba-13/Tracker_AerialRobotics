@@ -1,3 +1,0 @@
-/home/b_anshuman/Videos/Aerial/Tracker_AerialRobotics/videoHandling/CMakeFiles/rebuild_cache.dir
-/home/b_anshuman/Videos/Aerial/Tracker_AerialRobotics/videoHandling/CMakeFiles/video.dir
-/home/b_anshuman/Videos/Aerial/Tracker_AerialRobotics/videoHandling/CMakeFiles/edit_cache.dir
