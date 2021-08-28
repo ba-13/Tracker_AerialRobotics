@@ -1,4 +1,4 @@
-# Firefly in `rotors\_simulator`
+# Firefly in `rotors_simulator`
 
 Link to repo is [here](https://github.com/ethz-asl/rotors_simulator).  
 The package used is `rotors_gazebo`.  
