@@ -1,0 +1,72 @@
+<launch>
+    <!-- arg are values that can be either given here, or at cli -->
+    <!-- if you want to self-depend on this package, use firefly -->
+    <arg name="mav_name" default="firefly" />
+    <arg name="world_name" default="basic" />
+    <arg name="enable_logging" default="false" />
+    <arg name="enable_ground_truth" default="true" />
+    <arg name="log_file" default="$(arg mav_name)" />
+    <arg name="debug" default="false" />
+    <arg name="gui" default="true" />
+    <arg name="paused" default="true" />
+    <arg name="x" default="-5.0" />
+    <arg name="y" default="0.0" />
+    <arg name="z" default="2.0" />
+    <arg name="verbose" default="false" />
+
+    <!-- The following line causes gzmsg and gzerr messages to be printed to the console
+        (even when Gazebo is started through roslaunch) -->
+
+    <!--! rotors_gazebo in rotors_ws, uncomment for another mav -->
+    <!-- <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models"/>
+    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/models"/> -->
+
+    <!-- default with ROS -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find rotors_gazebo)/worlds/$(arg world_name).world" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="paused" value="$(arg paused)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="verbose" value="$(arg verbose)" />
+    </include>
+    <include file="$(find husky_gazebo)/launch/spawn_husky.launch"></include>
+
+    <group ns="$(arg mav_name)">
+
+        <!--! rotors_gazebo in rotors_ws, uncomment for another mav -->
+        <!-- <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+            <arg name="mav_name" value="$(arg mav_name)" />
+            <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor_camera.gazebo" />
+            <arg name="enable_logging" value="$(arg enable_logging)" />
+            <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+            <arg name="log_file" value="$(arg log_file)" />
+        </include> -->
+
+        <include file="$(find csrt_tracker)/launch/spawn_mav.launch">
+            <arg name="mav_name" value="$(arg mav_name)" />
+            <arg name="model" value="$(find csrt_tracker)/urdf/firefly_odometry_sensor_camera.gazebo" />
+            <arg name="enable_logging" value="$(arg enable_logging)" />
+            <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+            <arg name="log_file" value="$(arg log_file)" />
+        </include>
+
+        <!--! rotors_gazebo & rotors_control in rotors_ws, uncomment for controller -->
+        <!-- <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
+            <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
+            <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+            <remap from="odometry" to="odometry_sensor1/odometry" />
+        </node> -->
+
+        <node name="hovering_example" pkg="csrt_tracker" type="hovering_example" output="screen">
+            <param name="x" value="$(arg x)" />
+            <param name="y" value="$(arg y)" />
+            <param name="z" value="$(arg z)" />
+        </node>
+
+        <node name="ROI_handler" pkg="csrt_tracker" type="ROI_handler" output="screen" />
+
+        <!-- default with ROS -->
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    </group>
+</launch>
