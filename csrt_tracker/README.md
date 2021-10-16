@@ -8,6 +8,8 @@ If the `hovering_example` node shows include errors, you will need to install ro
 Plans are to implement a node that takes all relevant topic data to find world coordinates of the prey, and publish on `prey_needed_coordinates` topic.  
 This will in turn let us decide the relative position of the mav and the prey, thus enabling to follow it by changing /firefly/command/pose accordingly.
 
+Note that all header files in `./include/mav_msgs/` with capital first letters, are from `rotors_ws/devel/include/mav_msgs`, used to be symlinks, but used `sed` to copy the contents to an actual file.
+
 > **To be edited out later**  
 > Currently `catkin build` yields errors similar to [this](https://github.com/ArduPilot/ardupilot_wiki/issues/194).  
 > If the current state doesn't work, install rotors-simulator, copy all src files (and add the header files too) into rotors_gazebo, update CMakeLists.txt, and try again.

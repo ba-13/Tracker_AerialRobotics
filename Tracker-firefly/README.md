@@ -9,3 +9,8 @@ Husky simulator has been used as the prey, which can be installed by:
 ```bash
 sudo apt install ros-melodic-husky-simulator
 ```
+
+## Topics to use
+
+- /firefly/camera_nadir/camera_info - camera matrix
+- /firefly/ground_truth/transform - rotation and pose of uav wrt ground

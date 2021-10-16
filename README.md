@@ -48,3 +48,7 @@ Building through cmake.
 ## `./Tracker-firefly`
 
 Attaching a camera to firefly provided by this [repo](https://github.com/ethz-asl/rotors_simulator), tracking a Husky by varying the pose of both, Husky and Firefly.
+
+## `./csrt_tracker`
+
+A self-sufficient package that implements a mav that can track and follow a prey. Under-development presently.
